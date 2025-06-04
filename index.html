@@ -1,0 +1,185 @@
+<!DOCTYPE html><html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <title>التقديم على دولة كلاسيك</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700;900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', sans-serif;
+      background: radial-gradient(circle at center, #2a2929 0%, #d00d0d 100%);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: start;
+      padding-top: 30px;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 25px;
+      padding: 40px;
+      width: 95%;
+      max-width: 750px;
+      box-shadow: 0 10px 60px rgba(0, 0, 0, 0.7);
+      animation: drop 1s ease;
+    }
+    @keyframes drop {
+      from { transform: translateY(-30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .logo {
+      width: 100px;
+      border-radius: 20px;
+      display: block;
+      margin: 0 auto 20px;
+    }
+    h2 {
+      text-align: center;
+      font-size: 34px;
+      color: #00f7ff;
+      text-shadow: 0 0 12px #00f7ff;
+    }
+    .rules, .intro {
+      background-color: rgba(0, 0, 0, 0.3);
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 15px;
+      font-size: 16px;
+    }
+    label {
+      margin-top: 15px;
+      display: block;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 6px;
+      border: none;
+      border-radius: 10px;
+      background-color: rgba(255, 255, 255, 0.12);
+      color: white;
+      font-size: 15px;
+    }
+    button {
+      width: 100%;
+      padding: 15px;
+      margin-top: 30px;
+      background: linear-gradient(135deg, #00b894, #00cec9);
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0, 190, 150, 0.4);
+    }
+    button:hover {
+      transform: scale(1.04);
+    }
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 14px;
+      color: #ddd;
+    }
+    .footer img {
+      width: 28px;
+      vertical-align: middle;
+      margin: 0 6px;
+    }
+    .contacts {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .contacts a {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background-color: rgba(255,255,255,0.1);
+      padding: 6px 12px;
+      border-radius: 12px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 15px;
+    }
+    .contacts a:hover {
+      background-color: rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+  <img class="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbG0A-YoB9ej8nXMSOZCxqViUHPjKXWppd627G6jdz6Q&s" alt="شعار الكلاسيك">
+  <div class="container">
+    <h2>التقديم على دولة كلاسيك </h2><div class="intro">
+  <p>مرحبًا بك في نموذج التقديم لدولة كلاسيك ! نحن نؤمن ببناء بيئة آمنة وممتعة للجميع. الرجاء تعبئة جميع البيانات بدقة.</p>
+</div>
+
+<div class="rules">
+  <h4>قوانين دولة كلاسيك :</h4>
+  <ul>
+    <li>نحن كلاسيك نقبل الجميع حتى عمر 80 سنة.</li>
+    <li>نحن كلاسيك نحارب الفيمبوي وكل ما يضر القيم.</li>
+    <li>نحن كلاسيك نحاول صنع بيئة أفضل للكل.</li>
+  </ul>
+</div>
+
+<form id="applyForm">
+  <label for="sector">اسمك الكامل </label>
+  <input type="text" id="sector" required>
+
+  <label for="discord">اسم حسابك في الديسكورد:</label>
+  <input type="text" id="discord" required>
+
+  <label for="roblox">اسمك في روبلوكس:</label>
+  <input type="text" id="roblox" required>
+
+  <label for="age">العمر:</label>
+  <input type="number" id="age" required>
+
+  <label for="lastCountry">آخر دولة كنت فيها:</label>
+  <input type="text" id="lastCountry" required>
+
+  <label for="rank">رتبتك فيها:</label>
+  <input type="text" id="rank" required>
+
+  <label for="promise"> كرر التالي : احلف بالله العظيم قدامي إنك منت جاسوس ولا لك صلة بأي دولة ثانية، وإن نيتك صافية و انني لن اخون دولة:</label>
+  <input type="text" id="promise" required>
+
+  <label for="tiktokUser">حسابك في TikTok:</label>
+  <input type="text" id="tiktokUser">
+
+  <label for="contact">طريقة تواصل أخرى</label>
+  <input type="text" id="contact">
+
+  <button type="submit">إرسال التقديم</button>
+</form>
+
+<div class="footer">
+  <p>تصميم & برمجة: <strong>الامبراطور الكلاسيكي بدر الاول </strong></p>
+  <div class="contacts">
+    <a href="https://www.tiktok.com/@b.3.r0?_t=ZS-8wvurbXHFqC&_r=1" target="_blank">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4xaxF4jBlioSa5J5yA1hK8Vyd8PTBZnY_cUtemIUoMw&s" alt="TikTok Logo">@b.3.r0
+    </a>
+    <a href="https://discord.gg/UghXD2sX" target="_blank">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZkjJsjxdWHZx1bu22YA_cJm7bicMd7d_pfw&s" alt="Discord">Classic Discord
+    </a>
+  </div>
+</div>
+
+  </div>
+<script src="hook.js"></script>
+</body>
+</html>
