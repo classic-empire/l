@@ -1,82 +1,219 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>لوحة التخمين</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>بطاقة هوية إكسلاندية</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+    * { box-sizing: border-box; }
+
     body {
-      font-family: 'Tahoma', sans-serif;
+      font-family: 'Cairo', sans-serif;
+      background: #e4e9f7;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 400px;
+      background: linear-gradient(135deg, #1c2b5a, #274690);
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      color: #fff;
+      padding: 20px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: #f7b733;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      font-size: 26px;
+      font-weight: bold;
+      color: #1c2b5a;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      background: #f0f0f0;
     }
-    .panel {
-      background: white;
-      padding: 30px;
+
+    .photo {
+      width: 160px;
+      height: 180px;
+      border-radius: 10px;
+      background: #ddd;
+      overflow: hidden;
+    }
+
+    .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .info {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .info div {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 8px 12px;
+      border-radius: 6px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .label { font-weight: bold; }
+
+    .form {
+      margin-top: 30px;
+      width: 100%;
+      max-width: 400px;
+      background: #fff;
+      padding: 20px;
       border-radius: 15px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .form h2 {
       text-align: center;
-      width: 300px;
-    }
-    #randomText {
-      font-size: 18px;
+      color: #274690;
       margin-bottom: 20px;
-      border: 2px dashed #aaa;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: #1c2b5a;
+    }
+
+    .form-group input {
+      width: 100%;
       padding: 10px;
-      min-height: 40px;
-      word-wrap: break-word;
-    }
-    button {
-      padding: 10px 20px;
-      margin: 10px;
-      font-size: 16px;
-      cursor: pointer;
-      border: none;
       border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
     }
-    #generateBtn {
-      background-color: #3498db;
-      color: white;
-    }
-    #guessBtn {
-      background-color: #e74c3c;
-      color: white;
+
+    .form button {
+      display: block;
+      margin: 20px auto 10px;
+      padding: 12px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      background: #274690;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <div class="panel">
-    <div id="randomText">؟</div>
-    <button id="generateBtn">🔁 تغيير عشوائي</button><br>
-    <button id="guessBtn">تخمين تلقائي بواسطة سيرفر🔮</button>
+
+  <div class="card" id="idCard">
+    <div class="logo">XLD</div>
+    <div class="photo" id="photoBox">
+      <img id="photo" src="" alt="الصورة الشخصية" style="display: none;">
+    </div>
+    <div class="info">
+      <div><span class="label">الاسم:</span> <span id="nameOut">---</span></div>
+      <div><span class="label">تاريخ الميلاد:</span> <span id="dobOut">---</span></div>
+      <div><span class="label">الجنس:</span> <span>ذكر</span></div>
+      <div><span class="label">الرتبة:</span> <span id="rankOut">---</span></div>
+      <div><span class="label">الحالة:</span> <span id="statusOut">---</span></div>
+      <div><span class="label">رقم البطاقة:</span> <span id="cardIdOut">---</span></div>
+      <div><span class="label">تاريخ الإصدار:</span> <span id="issueDateOut"></span></div>
+    </div>
   </div>
 
+  <div class="form">
+    <h2>معلومات البطاقة</h2>
+    <div class="form-group">
+      <label>الاسم الكامل</label>
+      <input type="text" id="name">
+    </div>
+    <div class="form-group">
+      <label>تاريخ الميلاد</label>
+      <input type="date" id="dob">
+    </div>
+    <div class="form-group">
+      <label>الرتبة</label>
+      <input type="text" id="rank" placeholder="مثال: مواطن">
+    </div>
+    <div class="form-group">
+      <label>الحالة</label>
+      <input type="text" id="status" placeholder="مثال: نشط ✅">
+    </div>
+    <div class="form-group">
+      <label>رقم البطاقة</label>
+      <input type="text" id="cardId" placeholder="مثال: XLD-000123">
+    </div>
+    <div class="form-group">
+      <label>الصورة الشخصية</label>
+      <input type="file" id="upload" accept="image/*">
+    </div>
+    <button onclick="fillCard()">تحديث البطاقة</button>
+    <button onclick="downloadCard()">تحميل البطاقة PNG</button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script>
-    const textElement = document.getElementById("randomText");
-    const generateBtn = document.getElementById("generateBtn");
-    const guessBtn = document.getElementById("guessBtn");
+    function fillCard() {
+      document.getElementById('nameOut').innerText = document.getElementById('name').value || '---';
+      document.getElementById('dobOut').innerText = document.getElementById('dob').value || '---';
+      document.getElementById('rankOut').innerText = document.getElementById('rank').value || '---';
+      document.getElementById('statusOut').innerText = document.getElementById('status').value || '---';
+      document.getElementById('cardIdOut').innerText = document.getElementById('cardId').value || '---';
 
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?~';
+      const now = new Date();
+      const today = now.toISOString().split('T')[0];
+      document.getElementById('issueDateOut').innerText = today;
 
-    function getRandomText(length = 16) {
-      let result = '';
-      for (let i = 0; i < length; i++) {
-        result += characters.charAt(Math.floor(Math.random() * characters.length));
+      const file = document.getElementById('upload').files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const img = document.getElementById('photo');
+          img.src = e.target.result;
+          img.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
       }
-      return result;
     }
 
-    generateBtn.onclick = () => {
-      textElement.textContent = getRandomText();
-    };
-
-    guessBtn.onclick = () => {
-      alert("فاضي لك انا؟ قم خمن بنفسك بس");
-    };
+    function downloadCard() {
+      const card = document.getElementById("idCard");
+      html2canvas(card, { useCORS: true, scale: 2 }).then(canvas => {
+        const link = document.createElement("a");
+        link.download = "بطاقة_اكسلاند.png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+      }).catch(err => {
+        alert("تعذر تحميل البطاقة. تأكد من إذن الصور");
+        console.error(err);
+      });
+    }
   </script>
-طريقه التخمين اليدوي يجب عليك أن تفعل inspect لموقع تيك توك و تزيل كود الحد المعين من سكربتات الموقع 
-
 </body>
 </html>
